@@ -70,6 +70,10 @@ has 'extlib' => (
     is => 'rw', isa => 'Str', default => './extlib',
 );
 
+has 'background' => (
+    is => 'rw', isa => 'Bool', default => 0,
+);
+
 has '_meta' => (
     is => 'rw', isa => 'HashRef', default => sub { +{} },
 );
@@ -151,6 +155,7 @@ sub build_app {
         "-N", "APP_BUNDLER=Platypus-4.0",
         (map { ("-f", "$_") } @{$self->resources}, @{$self->default_resources}),
         "-c", $self->script,
+        ($self->background ? "-B" : ()),
         Cwd::cwd() . "/$app_path";
     print " DONE\n";
 }
@@ -239,6 +244,10 @@ See L</RESOURCES> how to reference resource files in your script.
 Perl module dependencies (Optional)
 
 By default the script would look at I<META.yml> in your current directory to find dependencies.
+
+=item background
+
+Whether to make the app run in the background: will not appear in the Dock (Optional) Defaults to 0.
 
 =back
 
