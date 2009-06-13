@@ -43,7 +43,7 @@ has 'identifier' => (
 );
 
 has 'version' => (
-    is => 'rw', isa => 'Str', default => "1.0",
+    is => 'rw', isa => 'Str',
 );
 
 has 'script' => (
@@ -112,7 +112,7 @@ sub setup_deps {
 
 sub setup_version {
     my $self = shift;
-    $self->version($self->_meta->{version}) if !$self->version && $self->_meta->{version};
+    $self->version($self->_meta->{version} || "1.0");
 }
 
 sub bundle_deps {
@@ -156,6 +156,7 @@ sub build_app {
         (map { ("-f", "$_") } @{$self->resources}, @{$self->default_resources}),
         "-c", $self->script,
         ($self->background ? "-B" : ()),
+        "-V", $self->version,
         Cwd::cwd() . "/$app_path";
     print " DONE\n";
 }
