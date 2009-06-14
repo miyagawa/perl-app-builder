@@ -148,8 +148,7 @@ sub build_app {
     print "Building Mac application ", $self->app, ".app ...";
     system "platypus",
         "-a", $self->app, "-o", 'None', "-u", $self->author,
-        "-p", $^X, "-V", '1.0',
-        "-s", '????',
+        "-p", $^X, "-s", '????',
         (-e $self->icon ? ("-i", $self->icon) : ()),
         "-I", $self->identifier,
         "-N", "APP_BUNDLER=Platypus-4.0",
