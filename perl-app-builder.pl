@@ -127,7 +127,7 @@ sub bundle_deps {
     # wtf: ExtUtils::MakeMaker shipped with Leopard is old
     $ENV{PERL_MM_OPT} =~ s/INSTALL_BASE=(.*)/$& INSTALLBASE=$1/;
 
-    # no man pages
+    # no man pages TODO: do the same with Module::Build
     $ENV{PERL_MM_OPT} .= " INSTALLMAN1DIR=none INSTALLMAN3DIR=none";
     $ENV{PERL_MM_USE_DEFAULT} = 1;
 
