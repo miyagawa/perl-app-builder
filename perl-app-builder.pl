@@ -112,7 +112,7 @@ sub setup_deps {
 
 sub setup_version {
     my $self = shift;
-    $self->version($self->_meta->{version} || "1.0");
+    $self->version($self->_meta->{version} || "1.0") unless $self->version;
 }
 
 sub bundle_deps {
