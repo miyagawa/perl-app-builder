@@ -10,6 +10,7 @@ use Cwd;
 use Config;
 use CPAN;
 use CPAN::HandleConfig;
+use local::lib ();
 
 with any_moose 'X::Getopt';
 
@@ -120,7 +121,6 @@ sub bundle_deps {
 
     CPAN::HandleConfig->load;
 
-    require local::lib;
     $ENV{PERL5LIB} = ''; # detach existent local::lib
     import local::lib '--self-contained', $self->extlib;
 
